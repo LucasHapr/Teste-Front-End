@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lilac - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Darker+Grotesque:wght@300..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="https://kit.fontawesome.com/847d0c9736.js" crossorigin="anonymous"></script>
+  </head>
+  <body data-page="home">
+    <div id="site-header"></div>
+    <div id="mobile-drawer"></div>
+
+    <main class="lilac-container space-y-10" id="page-content">
+      <section class="hero">
+        <div class="hero-nav">
+          <div class="hero-nav-inner">
+            <a href="/category.html?cat=camisetas">CAMISETAS</a>
+            <a href="/category.html?cat=calcados">CALÇADOS</a>
+            <a href="/category.html?cat=bolsas">BOLSAS</a>
+            <a href="/category.html?cat=oculos">ÓCULOS</a>
+          </div>
+        </div>
+        <div class="hero-carousel">
+          <button class="hero-arrow hero-arrow-left js-hero-prev">
+            <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
+              <path d="M10 2L2 10L10 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          
+          <div class="hero-slides">
+            <div class="hero-slide active" style="background-image: url('/assets/img/banners/hero-1.png');"></div>
+            <div class="hero-slide" style="background-image: url('/assets/img/banners/hero-1.png');"></div>
+            <div class="hero-slide" style="background-image: url('/assets/img/banners/hero-1.png');"></div>
+          </div>
+          
+          <button class="hero-arrow hero-arrow-right js-hero-next">
+            <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
+              <path d="M2 2L10 10L2 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <section id="benefits"></section>
+
+      <section class="py-6 px-6 rounded-2xl flex flex-col md:flex-row md:items-center md:justify-between gap-4" style="background-color: #F6EFFF;">
+        <h2 class="text-lg md:text-xl font-bold text-purple-800 whitespace-nowrap">PRODUTOS COM ATÉ 20% OFF</h2>
+        <p class="text-xs text-gray-700 flex-1 whitespace-nowrap">Separamos para você uma seção só de produtos com até 20% de desconto. Aproveite que é por tempo limitado.</p>
+        <button class="px-8 py-3 bg-purple-700 text-white text-base font-semibold rounded-full hover:bg-purple-800 transition-colors whitespace-nowrap">Confira!</button>
+      </section>
+
+      <section>
+        <div class="flex items-center justify-center mb-6">
+          <h2 class="section-title">DESTAQUES</h2>
+        </div>
+        <div class="highlights-carousel">
+          <button class="carousel-arrow-side carousel-arrow-left js-highlights-prev">
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+              <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="highlights-carousel-track" id="highlights-track">
+            <div class="highlights-carousel-inner" id="home-highlights"></div>
+          </div>
+          <button class="carousel-arrow-side carousel-arrow-right js-highlights-next">
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+              <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="img-wrap h-50">
+          <img data-fallback src="/assets/img/banners/banner-1.png" alt="Óculos" />
+          <span class="img-fallback-text">Imagem</span>
+        </div>
+        <div class="img-wrap h-50">
+          <img data-fallback src="/assets/img/banners/banner-2.png" alt="New drop" />
+          <span class="img-fallback-text">Imagem</span>
+        </div>
+        <div class="img-wrap h-50">
+          <img data-fallback src="/assets/img/banners/banner-3.png" alt="Minimal" />
+          <span class="img-fallback-text">Imagem</span>
+        </div>
+      </section>
+
+      <section>
+        <div class="flex items-center justify-center mb-6">
+          <h2 class="section-title">LANÇAMENTOS</h2>
+        </div>
+        <div class="highlights-carousel">
+          <button class="carousel-arrow-side carousel-arrow-left js-launches-prev">
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+              <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="highlights-carousel-track" id="launches-track">
+            <div class="highlights-carousel-inner" id="home-launches"></div>
+          </div>
+          <button class="carousel-arrow-side carousel-arrow-right js-launches-next">
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+              <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="discount-banner-wrap">
+          <img data-fallback src="/assets/img/banners/discount-1.png" alt="Seleção com descontos" />
+          <span class="img-fallback-text">Imagem</span>
+          <div class="discount-banner-overlay">
+            <h2 class="discount-banner-title">SELEÇÃO COM DESCONTOS</h2>
+            <div class="discount-banner-content">
+              <div class="discount-banner-text-col">
+                <p class="discount-banner-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget felis tincidunt, porttitor metus pulvinar, maximus leo.</p>
+              </div>
+              <div class="discount-banner-btn-col">
+                <button class="discount-banner-btn">Ver tudo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <!-- Category Tabs -->
+          <div class="flex gap-3 mb-6">
+            <button class="category-tab active" data-category="camisetas">CAMISETAS</button>
+            <button class="category-tab" data-category="calcados">CALÇADOS</button>
+            <button class="category-tab" data-category="bolsas">BOLSAS</button>
+            <button class="category-tab" data-category="oculos">ÓCULOS</button>
+          </div>
+          <!-- Carousel with 2 cards -->
+          <div class="discount-carousel">
+            <button class="carousel-arrow-side carousel-arrow-left js-discount-prev">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+                <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="discount-carousel-track">
+              <div class="discount-carousel-inner" id="home-discount-grid"></div>
+            </div>
+            <button class="carousel-arrow-side carousel-arrow-right js-discount-next">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+                <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Carousel de 2 cards -->
+        <div class="flex flex-col">
+          <!-- Category Tabs -->
+          <div class="flex gap-3 mb-6">
+            <button class="most-bought-tab active" data-category="camisetas">CAMISETAS</button>
+            <button class="most-bought-tab" data-category="calcados">CALÇADOS</button>
+            <button class="most-bought-tab" data-category="bolsas">BOLSAS</button>
+            <button class="most-bought-tab" data-category="oculos">ÓCULOS</button>
+          </div>
+          <!-- Carousel with 2 cards -->
+          <div class="most-bought-carousel">
+            <button class="carousel-arrow-side carousel-arrow-left js-most-bought-prev">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+                <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="most-bought-carousel-track">
+              <div class="most-bought-carousel-inner" id="home-most-grid"></div>
+            </div>
+            <button class="carousel-arrow-side carousel-arrow-right js-most-bought-next">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+                <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- Banner com overlay -->
+        <div class="most-bought-banner-wrap">
+          <img data-fallback src="/assets/img/banners/most-1.png" alt="Os mais comprados" />
+          <span class="img-fallback-text">Imagem</span>
+          <div class="most-bought-banner-overlay">
+            <h2 class="most-bought-banner-title">OS MAIS COMPRADOS</h2>
+            <div class="most-bought-banner-content">
+              <div class="most-bought-banner-text-col">
+                <p class="most-bought-banner-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget felis tincidunt, porttitor metus pulvinar, maximus leo.</p>
+              </div>
+              <div class="most-bought-banner-btn-col">
+                <button class="most-bought-banner-btn">Ver tudo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="newsletter"></section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <!-- Seção de Informações do Site -->
+    <div class="site-info-section">
+      <div class="site-info-container">
+        <!-- Pagamento -->
+        <div class="site-info-category">
+          <h3 class="site-info-category-title">Pagamento</h3>
+          <div class="site-info-icons">
+            <img src="/assets/img/info-icons/boleto.svg" alt="Boleto" class="site-info-icon">
+            <img src="/assets/img/info-icons/visa.svg" alt="Visa" class="site-info-icon">
+            <img src="/assets/img/info-icons/mastercard.svg" alt="Mastercard" class="site-info-icon">
+            <img src="/assets/img/info-icons/american-express.svg" alt="American Express" class="site-info-icon">
+            <img src="/assets/img/info-icons/diners.svg" alt="Diners" class="site-info-icon">
+            <img src="/assets/img/info-icons/hipercard.svg" alt="Hipercard" class="site-info-icon">
+            <img src="/assets/img/info-icons/elo.svg" alt="Elo" class="site-info-icon">
+          </div>
+        </div>
+
+        <!-- Segurança -->
+       
+
+        <!-- Entrega -->
+        <div class="site-info-category">
+          <h3 class="site-info-category-title">Entrega</h3>
+          <div class="site-info-icons">
+            <img src="/assets/img/info-icons/correios.svg" alt="Correios" class="site-info-icon">
+          </div>
+        </div>
+
+        <!-- Plataforma -->
+        <div class="site-info-category">
+          <h3 class="site-info-category-title">Plataforma</h3>
+          <div class="site-info-icons">
+            <img src="/assets/img/info-icons/irroba.svg" alt="Irroba" class="site-info-icon">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/js/store.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/ui.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lilac - Criar conta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="https://kit.fontawesome.com/847d0c9736.js" crossorigin="anonymous"></script>
+  </head>
+  <body data-page="register">
+    <div id="site-header"></div>
+    <div id="mobile-drawer"></div>
+
+    <main class="lilac-container space-y-8" id="page-content">
+      <section class="max-w-2xl mx-auto text-center space-y-6">
+        <div>
+          <h1 class="text-2xl font-semibold text-lilac-primary">CRIAR CONTA</h1>
+          <p class="text-xs text-lilac-muted">Já possui conta? <a href="/login.html" class="text-lilac-primary font-semibold">Entrar aqui</a></p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="Nome completo" />
+          <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="CPF" />
+          <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="Data de nascimento" />
+          <select class="rounded-full border border-lilac-border px-4 py-2">
+            <option>Sexo</option>
+            <option>Feminino</option>
+            <option>Masculino</option>
+            <option>Prefiro não dizer</option>
+          </select>
+          <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="Celular" />
+          <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="E-mail" />
+          <input type="password" class="rounded-full border border-lilac-border px-4 py-2" placeholder="Senha" />
+          <input type="password" class="rounded-full border border-lilac-border px-4 py-2" placeholder="Confirmar senha" />
+        </div>
+        <div class="lilac-card p-4 text-left space-y-3">
+          <h2 class="text-sm font-semibold text-lilac-primary">ENDEREÇO PARA ENTREGA</h2>
+          <div class="flex gap-2">
+            <input class="flex-1 rounded-full border border-lilac-border px-4 py-2" placeholder="CEP" />
+            <button class="lilac-btn lilac-btn-outline">Buscar</button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="Endereço" />
+            <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="Número" />
+            <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="Complemento" />
+            <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="Bairro" />
+            <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="Cidade" />
+            <input class="rounded-full border border-lilac-border px-4 py-2" placeholder="Estado" />
+          </div>
+        </div>
+        <button class="lilac-btn w-full">Criar conta</button>
+      </section>
+
+      <section id="benefits"></section>
+      <section id="newsletter"></section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/js/store.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/ui.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
