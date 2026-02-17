@@ -1,10 +1,8 @@
 const UI = (() => {
   const headerTemplate = () => `
-    <!-- TOP INFO BAR -->
     <div class="top-info-bar">
       <div class="lilac-container">
         <div class="top-info-bar-inner">
-          <!-- Left Icons -->
           <div class="top-info-icons-left">
             <a href="#" class="top-info-icon" title="WhatsApp">
               <i class="fa-brands fa-whatsapp"></i>
@@ -14,10 +12,8 @@ const UI = (() => {
             </a>
           </div>
           
-          <!-- Center Text -->
           <span class="top-info-text">Digite o texto informativo aqui</span>
           
-          <!-- Right Icons -->
           <div class="top-info-icons-right">
             <a href="#" class="top-info-icon" title="Facebook">
               <i class="fa-brands fa-facebook-f"></i>
@@ -42,7 +38,6 @@ const UI = (() => {
             </button>
             
             <div class="search-wrapper">
-              <!-- Search Button (Default State) -->
               <button class="js-open-search header-icon-btn header-icon-btn-outline" id="search-btn">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="11" cy="11" r="7" />
@@ -168,7 +163,6 @@ const UI = (() => {
     <section id="benefits" class="py-12 md:py-16 bg-white">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-11">
-          <!-- Entrega rápida -->
           <div class="flex items-center gap-4">
             <div class="flex items-center justify-center w-16 h-16 rounded-xl flex-shrink-0" style="background-color: #F6EFFF;">
               <i class="fa-solid fa-truck text-purple-700 text-2xl"></i>
@@ -179,7 +173,6 @@ const UI = (() => {
             </div>
           </div>
 
-          <!-- Parcele suas compras -->
           <div class="flex items-center gap-4">
             <div class="flex items-center justify-center w-16 h-16 rounded-xl flex-shrink-0" style="background-color: #F6EFFF;">
               <i class="fa-solid fa-credit-card text-purple-700 text-2xl"></i>
@@ -190,7 +183,6 @@ const UI = (() => {
             </div>
           </div>
 
-          <!-- Loja segura -->
           <div class="flex items-center gap-4">
             <div class="flex items-center justify-center w-16 h-16 rounded-xl flex-shrink-0" style="background-color: #F6EFFF;">
               <i class="fa-solid fa-lock text-purple-700 text-2xl"></i>
@@ -201,7 +193,6 @@ const UI = (() => {
             </div>
           </div>
 
-          <!-- Todos os produtos -->
           <div class="flex items-center gap-4">
             <div class="flex items-center justify-center w-16 h-16 rounded-xl flex-shrink-0" style="background-color: #F6EFFF;">
               <i class="fa-solid fa-box text-purple-700 text-2xl"></i>
@@ -313,30 +304,23 @@ const UI = (() => {
     const count = getCartCount();
     const $badge = $("#cart-count");
     if (!$badge.length) return;
-    if (count > 0) {
-      $badge.text(count).show();
-    } else {
-      $badge.hide();
-    }
+
+    count > 0 ? $badge.text(count).show() : $badge.hide();
   };
 
   const attachImageFallback = () => {
     $("img[data-fallback]")
       .off("error")
-      .on("error", function () {
+      .on("error", function() {
         $(this).closest(".img-wrap").addClass("is-broken");
         $(this).attr("src", "");
       });
   };
 
   const renderCategoryPage = (category) => {
-    const products = category
-      ? STORE_PRODUCTS.filter((prod) => prod.category === category)
-      : STORE_PRODUCTS;
-
+    const products = category ? STORE_PRODUCTS.filter((prod) => prod.category === category) : STORE_PRODUCTS;
     $("#category-title").text(category ? category.toUpperCase() : "PRODUTOS");
     $("#category-breadcrumb").text(category ? `Home / ${category}` : "Home / Produtos");
-
     const cards = products.map((prod) => productCard(prod)).join("");
     $("#category-grid").html(cards || "<p>Nenhum produto encontrado.</p>");
     attachImageFallback();
@@ -433,38 +417,32 @@ const UI = (() => {
       $("#mobile-drawer").removeClass("open");
     });
 
-    // Fechar drawer ao clicar fora
     $(document).on("click", "#mobile-drawer", (e) => {
       if ($(e.target).is("#mobile-drawer")) {
         $("#mobile-drawer").removeClass("open");
       }
     });
 
-    // Prevenir que cliques dentro do dropdown fechem o drawer
     $(document).on("click", ".drawer-dropdown", (e) => {
       e.stopPropagation();
     });
 
-    // Abrir drawer da sacola
     $(document).on("click", ".js-open-cart", (e) => {
       e.stopPropagation();
       $("#cart-drawer").addClass("open");
       updateCartDrawer();
     });
 
-    // Fechar drawer da sacola
     $(document).on("click", ".js-close-cart", () => {
       $("#cart-drawer").removeClass("open");
     });
 
-    // Fechar drawer da sacola ao clicar fora
     $(document).on("click", "#cart-drawer", (e) => {
       if ($(e.target).is("#cart-drawer")) {
         $("#cart-drawer").removeClass("open");
       }
     });
 
-    // Prevenir que cliques dentro do painel da sacola fechem o drawer
     $(document).on("click", ".cart-drawer-panel", (e) => {
       e.stopPropagation();
     });
@@ -603,7 +581,6 @@ const UI = (() => {
     $("#site-header").html(headerTemplate());
     $("#mobile-drawer").replaceWith(drawerTemplate());
     
-    // Adicionar cart drawer se não existir
     if (!$("#cart-drawer").length) {
       $("body").append(cartDrawerTemplate());
     }
