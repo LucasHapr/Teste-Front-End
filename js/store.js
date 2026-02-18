@@ -18,7 +18,7 @@ const STORE_PRODUCTS = [
   },
   {
     id: 2,
-    name: "Sapato oxford de couro bico arredondado",
+    name: "Sapato oxford de couro bico",
     category: "calcados",
     price: 400.0,
     oldPrice: 499.0,

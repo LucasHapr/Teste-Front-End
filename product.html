@@ -13,56 +13,113 @@
     <div id="mobile-drawer"></div>
 
     <main class="lilac-container space-y-10" id="page-content">
-      <div class="text-xs text-lilac-muted">Home / Camisetas / Camiseta preta unissex</div>
-
-      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div class="flex gap-4">
-          <div class="flex flex-col gap-3" id="product-thumbs"></div>
-          <div class="flex-1">
-            <div class="img-wrap h-80">
-              <img id="product-main-img" data-fallback src="" alt="Produto" />
-              <span class="img-fallback-text">Imagem</span>
-            </div>
-          </div>
-        </div>
-        <div class="space-y-4">
-          <h1 class="text-2xl font-semibold" id="product-title"></h1>
-          <div class="flex items-center gap-3">
-            <span class="text-sm text-lilac-muted line-through" id="product-old-price"></span>
-            <span class="text-xl font-semibold" id="product-price"></span>
-            <span class="lilac-badge" id="product-discount"></span>
-          </div>
-          <div class="flex gap-2">
-            <button class="lilac-pill">Cartão</button>
-            <button class="lilac-pill">Pix</button>
-            <button class="lilac-pill">Avaliações</button>
-          </div>
-          <div>
-            <p class="text-sm font-semibold mb-2">Selecione o tamanho</p>
-            <div class="flex flex-wrap gap-2" id="product-sizes"></div>
-          </div>
-          <div class="flex flex-col gap-3">
-            <button id="product-buy-btn" class="lilac-btn js-add-to-cart" data-product-id="1">Comprar</button>
-            <button class="lilac-btn lilac-btn-outline">Comprar no WhatsApp</button>
-          </div>
-          <div class="lilac-card p-4">
-            <p class="text-sm font-semibold mb-2">Calcular frete</p>
-            <div class="flex gap-2">
-              <input class="flex-1 rounded-full border border-lilac-border px-4 py-2" placeholder="Digite seu CEP" />
-              <button class="lilac-btn lilac-btn-outline">Calcular</button>
-            </div>
-            <p class="text-xs text-lilac-muted mt-2">Não sei meu CEP</p>
-          </div>
-          <div class="text-sm text-lilac-muted">Compartilhar: Facebook • Instagram • Twitter</div>
-        </div>
+      <section class="product-shell">
+        <div class="product-shell-breadcrumb">Lilac | Camisetas | Camiseta preta unissex gola careca</div>
       </section>
 
-      <section>
-        <h2 class="section-title mb-4">COMPRE JUNTO</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="buy-together-grid"></div>
-        <div class="lilac-card p-4 mt-4 flex items-center justify-between">
-          <p class="text-sm">Selecione os produtos e adicione ao carrinho.</p>
-          <button class="lilac-btn">Adicionar ao carrinho</button>
+      <section class="product-ux-grid">
+        <div class="product-gallery-wrap">
+          <div class="product-gallery-rail">
+            <div class="product-thumbs-viewport" id="product-thumbs-viewport">
+              <div class="product-gallery-thumbs" id="product-thumbs"></div>
+            </div>
+            <button
+              class="product-thumbs-next w-[120px] aspect-square self-start shrink-0 p-0 rounded-2xl border-2 border-[#EADFFF] bg-white/75 shadow-[0_8px_20px_rgba(109,90,138,0.12)] flex items-center justify-center text-[22px] text-[#6D5A8A]/80 leading-none"
+              id="product-thumbs-next"
+              type="button"
+              aria-label="Ver próximas miniaturas"
+            >
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+          </div>
+
+          <div class="product-main-media">
+            <span class="product-main-badge" id="product-discount">20% off</span>
+            <img id="product-main-img" data-fallback src="" alt="Produto" />
+            <button class="product-main-arrow product-main-arrow-left" type="button" aria-label="Anterior">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="product-main-arrow product-main-arrow-right" type="button" aria-label="Próximo">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+
+          <div class="product-details-block">
+            <h2>DETALHES DO PRODUTO</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tristique diam dapibus elit dapibus, ornare commodo elit malesuada.
+              Curabitur non lacus eget ante lacinia laoreet. Proin interdum, mauris nec pharetra mollis, tellus libero vestibulum lectus, non mollis
+              augue turpis at risus.
+            </p>
+            <button type="button">Ver mais +</button>
+          </div>
+        </div>
+
+        <aside class="product-buy-panel">
+          <h1 id="product-title"></h1>
+
+          <div class="product-price-row">
+            <span class="product-old-price" id="product-old-price"></span>
+            <span class="product-current-price" id="product-price"></span>
+            <span class="product-discount-pill" id="product-discount-pill">20% off</span>
+          </div>
+
+          <div class="product-pay-pills">
+            <span class="product-pay-pill">Cartão</span>
+            <span class="product-pay-text" id="product-installments-card">3x de R$ 26,63 sem juros</span>
+            <span class="product-pay-divider">|</span>
+            <span class="product-pay-pill">PIX</span>
+            <span class="product-pay-text" id="product-installments-pix">R$ 71,93 (-10%)</span>
+          </div>
+
+          <div class="product-actions-row">
+            <button type="button"><i class="fa-regular fa-star"></i>0 avaliações</button>
+            <button type="button"><i class="fa-regular fa-pen-to-square"></i>Avaliar este produto</button>
+          </div>
+
+          <div class="product-size-box">
+            <p>Selecione o tamanho</p>
+            <div id="product-sizes" class="product-size-buttons"></div>
+          </div>
+
+          <div class="product-colors-box">
+            <p>Outras cores</p>
+            <div class="product-colors-thumbs">
+              <div class="img-wrap"><img data-fallback src="/assets/img/products/shirt.png" alt="Cor 1" /></div>
+              <div class="img-wrap"><img data-fallback src="/assets/img/products/shirt.png" alt="Cor 2" /></div>
+            </div>
+          </div>
+
+          <button id="product-buy-btn" class="product-buy-btn js-add-to-cart" data-product-id="1">Comprar</button>
+          <button class="product-buy-whatsapp" type="button"><i class="fa-brands fa-whatsapp"></i>Comprar no WhatsApp</button>
+
+          <div class="product-shipping-box">
+            <div class="product-shipping-top">
+              <span>Calcule prazos e frete</span>
+              <a href="#">Não sei meu CEP</a>
+            </div>
+            <div class="product-shipping-form">
+              <input type="text" placeholder="Digite seu CEP" />
+              <button type="button" class="js-open-shipping-modal">Calcular</button>
+            </div>
+          </div>
+
+          <div class="product-share-row">
+            <span>Compartilhar</span>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="E-mail"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#" aria-label="Link"><i class="fa-solid fa-link"></i></a>
+          </div>
+        </aside>
+      </section>
+
+      <section class="buy-together-section">
+        <h2 class="buy-together-title">COMPRE JUNTO</h2>
+        <div class="buy-together-grid" id="buy-together-grid"></div>
+        <div class="buy-together-footer">
+          <p class="buy-together-footer-text">Selecione o produto desejado acima para adicionar à sua compra</p>
+          <button type="button" class="buy-together-footer-btn js-buy-together-add">Adicionar ao carrinho</button>
         </div>
       </section>
 
@@ -77,10 +134,62 @@
 
     <div id="site-footer"></div>
 
+    <div class="shipping-modal" id="shipping-modal" aria-hidden="true">
+      <div class="shipping-modal-panel" role="dialog" aria-modal="true" aria-labelledby="shipping-modal-title">
+        <div class="shipping-modal-header">
+          <h2 id="shipping-modal-title">FRETE</h2>
+          <button type="button" class="shipping-modal-close js-close-shipping-modal" aria-label="Fechar modal de frete">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <p class="shipping-modal-text">Confira abaixo as opções de prazos e preços para o frete.</p>
+
+        <div class="shipping-modal-options">
+          <div class="shipping-modal-option">
+            <h3>SEDEX - até 2 dias úteis - R$ 9,29</h3>
+            <p>Para todo Brasil com transporte aéreo.</p>
+          </div>
+
+          <div class="shipping-modal-option">
+            <h3>SEDEX - até 2 dias úteis - R$ 9,29</h3>
+            <p>Para todo Brasil com transporte aéreo.</p>
+          </div>
+
+          <div class="shipping-modal-option">
+            <h3>SEDEX - até 2 dias úteis - R$ 9,29</h3>
+            <p>Para todo Brasil com transporte aéreo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="/js/store.js"></script>
     <script src="/js/cart.js"></script>
     <script src="/js/ui.js"></script>
     <script src="/js/app.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const viewport = document.getElementById("product-thumbs-viewport");
+        const nextBtn = document.getElementById("product-thumbs-next");
+        if (!viewport || !nextBtn) return;
+
+        const STEP = 136; // 120px thumb + 16px gap
+
+        nextBtn.addEventListener("click", function () {
+          const maxScrollTop = viewport.scrollHeight - viewport.clientHeight;
+          const atEnd = viewport.scrollTop >= maxScrollTop - 4;
+
+          if (atEnd) {
+            viewport.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+          }
+
+          viewport.scrollBy({ top: STEP, behavior: "smooth" });
+        });
+      });
+    </script>
   </body>
 </html>

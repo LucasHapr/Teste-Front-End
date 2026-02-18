@@ -405,6 +405,45 @@ const UI = (() => {
     </div>
   `;
 
+  const buyTogetherCard = (product, index) => {
+    const showSizeSelector = index !== 0;
+    const sizes = (product.sizes || ["P", "M", "G", "GG"]).map((size) => `<option value="${size}">${size}</option>`).join("");
+
+    return `
+      <article class="buy-together-card ${index === 0 ? "is-selected" : ""}" data-product-id="${product.id}">
+        <div class="buy-together-card-media">
+          <button type="button" class="buy-together-check js-buy-together-toggle" aria-label="Selecionar produto">
+            <i class="fa-solid fa-check"></i>
+          </button>
+          <a href="/product.html?id=${product.id}">
+            <img data-fallback src="${product.img}" alt="${product.name}" />
+          </a>
+          ${
+            showSizeSelector
+              ? `
+            <div class="buy-together-size-wrap">
+              <select class="buy-together-size js-buy-together-size" aria-label="Escolha o tamanho">
+                <option value="">Tamanho</option>
+                ${sizes}
+              </select>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          `
+              : ""
+          }
+        </div>
+        <div class="buy-together-card-info">
+          <p class="buy-together-card-title">${product.name}</p>
+          <div class="buy-together-card-prices">
+            <span class="buy-together-old-price">R$ ${formatCurrency(product.oldPrice)}</span>
+            <span class="buy-together-current-price">R$ ${formatCurrency(product.price)}</span>
+          </div>
+          <p class="buy-together-installments">${product.installmentsText}</p>
+        </div>
+      </article>
+    `;
+  };
+
   const updateCartBadge = () => {
     const count = getCartCount();
     const $badge = $("#cart-count");
@@ -443,8 +482,8 @@ const UI = (() => {
 
     const thumbs = product.images
       .map(
-        (img) => `
-        <button class="img-wrap h-20 js-thumb" data-img="${img}">
+        (img, index) => `
+        <button class="js-thumb ${index === 0 ? "is-active" : ""}" data-thumb="${index}" data-main="${img}" data-img="${img}">
           <img data-fallback src="${img}" alt="${product.name}" />
           <span class="img-fallback-text">Imagem</span>
         </button>
@@ -458,6 +497,9 @@ const UI = (() => {
     $("#product-price").text(`R$ ${formatCurrency(product.price)}`);
     $("#product-old-price").text(`R$ ${formatCurrency(product.oldPrice)}`);
     $("#product-discount").text(product.discountLabel);
+    $("#product-discount-pill").text(product.discountLabel);
+    $("#product-installments-card").text(product.installmentsText);
+    $("#product-installments-pix").text(`R$ ${formatCurrency(product.price * 0.9)} (-10%)`);
     $("#product-buy-btn").attr("data-product-id", product.id);
 
     const sizes = product.sizes
@@ -471,7 +513,9 @@ const UI = (() => {
 
     const related = STORE_PRODUCTS.filter((prod) => prod.id !== product.id).slice(0, 4);
     $("#related-grid").html(related.map((prod) => productCard(prod)).join(""));
-    $("#buy-together-grid").html(related.map((prod) => productCard(prod)).join(""));
+    const buyTogetherItems = [product, ...related.slice(0, 3)];
+    $("#buy-together-grid").html(buyTogetherItems.map((prod, index) => buyTogetherCard(prod, index)).join(""));
+    $(".buy-together-footer-text").text("Selecione o produto desejado acima para adicionar à sua compra");
 
     attachImageFallback();
   };
@@ -519,6 +563,26 @@ const UI = (() => {
   };
 
   const bindGlobalEvents = () => {
+    const updateBuyTogetherSummary = () => {
+      const selectedCount = $(".buy-together-card.is-selected").length;
+      if (!selectedCount) {
+        $(".buy-together-footer-text").text("Selecione o produto desejado acima para adicionar à sua compra");
+        return;
+      }
+
+      $(".buy-together-footer-text").text(`${selectedCount} produto(s) selecionado(s) para adicionar ao carrinho`);
+    };
+
+    const openShippingModal = () => {
+      $("#shipping-modal").addClass("open").attr("aria-hidden", "false");
+      $("body").addClass("modal-open");
+    };
+
+    const closeShippingModal = () => {
+      $("#shipping-modal").removeClass("open").attr("aria-hidden", "true");
+      $("body").removeClass("modal-open");
+    };
+
     $(document).on("click", ".js-open-drawer", (e) => {
       e.stopPropagation();
       $("#mobile-drawer").addClass("open");
@@ -574,6 +638,31 @@ const UI = (() => {
       }, 300);
     });
 
+    $(document).on("click", ".js-open-shipping-modal", (e) => {
+      e.preventDefault();
+      openShippingModal();
+    });
+
+    $(document).on("click", ".js-close-shipping-modal", () => {
+      closeShippingModal();
+    });
+
+    $(document).on("click", "#shipping-modal", (e) => {
+      if ($(e.target).is("#shipping-modal")) {
+        closeShippingModal();
+      }
+    });
+
+    $(document).on("click", ".shipping-modal-panel", (e) => {
+      e.stopPropagation();
+    });
+
+    $(document).on("keydown", (e) => {
+      if (e.key === "Escape" && $("#shipping-modal").hasClass("open")) {
+        closeShippingModal();
+      }
+    });
+
     $(document).on("click", ".js-toggle-user-menu", (e) => {
       e.stopPropagation();
       const isActive = $("#user-menu-expanded").hasClass("active");
@@ -607,9 +696,42 @@ const UI = (() => {
       $(this).addClass("active");
     });
 
+    $(document).on("click", ".js-buy-together-toggle", function () {
+      const $card = $(this).closest(".buy-together-card");
+      $card.toggleClass("is-selected");
+      updateBuyTogetherSummary();
+    });
+
+    $(document).on("change", ".js-buy-together-size", function () {
+      $(this).closest(".buy-together-card").addClass("is-selected");
+      updateBuyTogetherSummary();
+    });
+
+    $(document).on("click", ".js-buy-together-add", function () {
+      const $selectedCards = $(".buy-together-card.is-selected");
+      if (!$selectedCards.length) return;
+
+      $selectedCards.each(function () {
+        const productId = Number($(this).data("product-id"));
+        const size = $(this).find(".js-buy-together-size").val() || null;
+        addToCart(productId, 1, size);
+      });
+
+      updateCartBadge();
+      updateCartDrawer();
+      updateBuyTogetherSummary();
+    });
+
     $(document).on("click", ".js-thumb", function () {
-      const img = $(this).data("img");
+      const img = $(this).data("main") || $(this).data("img");
       $("#product-main-img").attr("src", img);
+      $(".js-thumb").removeClass("is-active");
+      $(this).addClass("is-active");
+
+      const viewport = document.getElementById("product-thumbs-viewport");
+      if (viewport && window.innerWidth > 1024) {
+        this.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+      }
     });
 
     $(document).on("click", ".js-qty-minus", function () {

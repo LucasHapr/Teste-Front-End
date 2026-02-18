@@ -317,6 +317,29 @@ $(document).ready(() => {
   if (page === "product") {
     const productId = getQueryParam("id");
     UI.renderProductPage(productId);
+
+    const $thumbViewport = $("#product-thumbs-viewport");
+    const $thumbList = $("#product-thumbs");
+    const $thumbNext = $("#product-thumbs-next");
+
+    $thumbNext.on("click", () => {
+      const viewport = $thumbViewport.get(0);
+      if (!viewport) return;
+
+      const firstThumb = $thumbList.find(".js-thumb").first();
+      if (!firstThumb.length) return;
+
+      const gap = parseFloat($thumbList.css("gap")) || 0;
+      const step = firstThumb.outerHeight() + gap;
+      const maxTop = viewport.scrollHeight - viewport.clientHeight;
+
+      if (viewport.scrollTop >= maxTop - 2) {
+        viewport.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      viewport.scrollBy({ top: step, behavior: "smooth" });
+    });
   }
 
   if (page === "cart") {
