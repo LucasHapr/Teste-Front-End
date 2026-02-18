@@ -11,9 +11,17 @@ const UI = (() => {
               <i class="fa-solid fa-phone"></i>
             </a>
           </div>
-          
-          <span class="top-info-text">Digite o texto informativo aqui</span>
-          
+
+          <div class="top-info-center">
+            <button class="top-info-nav top-info-nav-left" type="button" aria-label="Mensagem anterior">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <span class="top-info-text">Digite o texto informativo aqui</span>
+            <button class="top-info-nav top-info-nav-right" type="button" aria-label="Próxima mensagem">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+
           <div class="top-info-icons-right">
             <a href="#" class="top-info-icon" title="Facebook">
               <i class="fa-brands fa-facebook-f"></i>
@@ -69,6 +77,12 @@ const UI = (() => {
           </a>
           
           <div class="flex items-center gap-3">
+            <button class="header-icon-btn header-icon-btn-outline header-mobile-search js-open-mobile-search" aria-label="Buscar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="7" />
+                <line x1="16.65" y1="16.65" x2="21" y2="21" />
+              </svg>
+            </button>
             <div class="user-menu-wrapper">
               <div class="user-menu-expanded" id="user-menu-expanded">
                 <a href="/register.html" class="user-menu-link">Cadastrar</a>
@@ -88,6 +102,22 @@ const UI = (() => {
                 <path d="M16 10a4 4 0 0 1-8 0"/>
               </svg>
               <span id="cart-count" class="cart-badge" style="display:none">0</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mobile-search-panel" id="mobile-search-panel">
+          <div class="mobile-search-input-wrap">
+            <svg class="mobile-search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="11" cy="11" r="7" />
+              <line x1="16.65" y1="16.65" x2="21" y2="21" />
+            </svg>
+            <input type="text" class="mobile-search-input" placeholder="Digite o que você procura" />
+            <button class="mobile-search-close js-close-mobile-search" type="button" aria-label="Fechar busca">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
           </div>
         </div>
@@ -667,6 +697,18 @@ const UI = (() => {
       }, 300);
     });
 
+    $(document).on("click", ".js-open-mobile-search", () => {
+      $("#mobile-search-panel").addClass("open");
+      setTimeout(() => {
+        $("#mobile-search-panel .mobile-search-input").trigger("focus");
+      }, 220);
+    });
+
+    $(document).on("click", ".js-close-mobile-search", () => {
+      $("#mobile-search-panel").removeClass("open");
+      $("#mobile-search-panel .mobile-search-input").val("");
+    });
+
     $(document).on("click", ".js-open-shipping-modal", (e) => {
       e.preventDefault();
       openShippingModal();
@@ -689,6 +731,9 @@ const UI = (() => {
     $(document).on("keydown", (e) => {
       if (e.key === "Escape" && $("#shipping-modal").hasClass("open")) {
         closeShippingModal();
+      }
+      if (e.key === "Escape" && $("#mobile-search-panel").hasClass("open")) {
+        $("#mobile-search-panel").removeClass("open");
       }
     });
 
