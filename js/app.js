@@ -30,22 +30,98 @@ $(document).ready(() => {
     $("#home-most-grid").html(mostBoughtCarousel.map((prod) => UI.productCard(prod)).join(""));
     UI.attachImageFallback();
     
+    setTimeout(() => {
+      if (window.innerWidth <= 768) {
+        let benefitsIndex = 0;
+        const $benefitsTrack = $(".benefits-carousel-track");
+        const benefitsCount = $benefitsTrack.find(".benefit-item").length;
+        
+        const $dotsContainer = $(".benefits-dots");
+        for (let i = 0; i < benefitsCount; i++) {
+          $dotsContainer.append(`<button class="benefits-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></button>`);
+        }
+        
+        const updateBenefitsDots = () => {
+          $(".benefits-dot").removeClass("active");
+          $(`.benefits-dot[data-index="${benefitsIndex}"]`).addClass("active");
+        };
+        
+        const scrollToBenefit = (index) => {
+          benefitsIndex = index;
+          $benefitsTrack.css("transform", `translateX(-${benefitsIndex * 100}%)`);
+          updateBenefitsDots();
+        };
+        
+        $(document).off("click", ".js-benefits-prev").on("click", ".js-benefits-prev", (e) => {
+          e.preventDefault();
+          console.log("Prev clicked, current index:", benefitsIndex);
+          if (benefitsIndex > 0) {
+            scrollToBenefit(benefitsIndex - 1);
+          }
+        });
+        
+        $(document).off("click", ".js-benefits-next").on("click", ".js-benefits-next", (e) => {
+          e.preventDefault();
+          console.log("Next clicked, current index:", benefitsIndex);
+          if (benefitsIndex < benefitsCount - 1) {
+            scrollToBenefit(benefitsIndex + 1);
+          }
+        });
+        
+        $(document).on("click", ".benefits-dot", function() {
+          scrollToBenefit($(this).data("index"));
+        });
+        
+        let benefitsStartX = 0;
+        let benefitsCurrentX = 0;
+        
+        $benefitsTrack.on("touchstart", (e) => {
+          benefitsStartX = e.touches[0].clientX;
+        });
+        
+        $benefitsTrack.on("touchmove", (e) => {
+          benefitsCurrentX = e.touches[0].clientX;
+        });
+        
+        $benefitsTrack.on("touchend", () => {
+          const diff = benefitsStartX - benefitsCurrentX;
+          if (Math.abs(diff) > 50) {
+            if (diff > 0 && benefitsIndex < benefitsCount - 1) {
+              scrollToBenefit(benefitsIndex + 1);
+            } else if (diff < 0 && benefitsIndex > 0) {
+              scrollToBenefit(benefitsIndex - 1);
+            }
+          }
+        });
+      }
+    }, 100);
+    
     let highlightsIndex = 0;
     const $highlightsTrack = $("#home-highlights");
-    const cardWidth = 25 + 1.2;
     const maxIndex = 8;
+    const applyHighlightsTransform = () => {
+      if (window.innerWidth <= 768) {
+        const $card = $highlightsTrack.find(".product-card").first();
+        const gap = parseFloat($highlightsTrack.css("gap")) || 0;
+        const step = $card.length ? $card.outerWidth() + gap : 0;
+        $highlightsTrack.css("transform", `translateX(-${highlightsIndex * step}px)`);
+        return;
+      }
+      const desktopCardWidth = 25 + 1.2;
+      $highlightsTrack.css("transform", `translateX(-${highlightsIndex * desktopCardWidth}%)`);
+    };
     
     $(".js-highlights-next").on("click", () => {
       if (highlightsIndex < maxIndex) {
         highlightsIndex++;
-        $highlightsTrack.css("transform", `translateX(-${highlightsIndex * cardWidth}%)`);
+        applyHighlightsTransform();
       }
     });
     
     $(".js-highlights-prev").on("click", () => {
       if (highlightsIndex > 0) {
         highlightsIndex--;
-        $highlightsTrack.css("transform", `translateX(-${highlightsIndex * cardWidth}%)`);
+        applyHighlightsTransform();
       }
     });
     
@@ -54,23 +130,34 @@ $(document).ready(() => {
       if (highlightsIndex >= maxIndex) {
         highlightsIndex = 0;
       }
-      $highlightsTrack.css("transform", `translateX(-${highlightsIndex * cardWidth}%)`);
+      applyHighlightsTransform();
     }, 3000);
     
     let launchesIndex = 0;
     const $launchesTrack = $("#home-launches");
+    const applyLaunchesTransform = () => {
+      if (window.innerWidth <= 768) {
+        const $card = $launchesTrack.find(".product-card").first();
+        const gap = parseFloat($launchesTrack.css("gap")) || 0;
+        const step = $card.length ? $card.outerWidth() + gap : 0;
+        $launchesTrack.css("transform", `translateX(-${launchesIndex * step}px)`);
+        return;
+      }
+      const desktopCardWidth = 25 + 1.2;
+      $launchesTrack.css("transform", `translateX(-${launchesIndex * desktopCardWidth}%)`);
+    };
     
     $(".js-launches-next").on("click", () => {
       if (launchesIndex < maxIndex) {
         launchesIndex++;
-        $launchesTrack.css("transform", `translateX(-${launchesIndex * cardWidth}%)`);
+        applyLaunchesTransform();
       }
     });
     
     $(".js-launches-prev").on("click", () => {
       if (launchesIndex > 0) {
         launchesIndex--;
-        $launchesTrack.css("transform", `translateX(-${launchesIndex * cardWidth}%)`);
+        applyLaunchesTransform();
       }
     });
     
@@ -79,7 +166,7 @@ $(document).ready(() => {
       if (launchesIndex >= maxIndex) {
         launchesIndex = 0;
       }
-      $launchesTrack.css("transform", `translateX(-${launchesIndex * cardWidth}%)`);
+      applyLaunchesTransform();
     }, 3500);
     
     let discountIndex = 0;
@@ -87,7 +174,8 @@ $(document).ready(() => {
     const getDiscountVisible = () => (window.innerWidth <= 768 ? 1 : 2);
     const getDiscountStep = () => {
       const $card = $discountTrack.find(".product-card").first();
-      return $card.length ? $card.outerWidth(true) : 0;
+      const gap = parseFloat($discountTrack.css("gap")) || 0;
+      return $card.length ? $card.outerWidth() + gap : 0;
     };
     const getDiscountMax = () => {
       const total = $discountTrack.children().length;
@@ -157,7 +245,8 @@ $(document).ready(() => {
     const getMostBoughtVisible = () => (window.innerWidth <= 768 ? 1 : 2);
     const getMostBoughtStep = () => {
       const $card = $mostBoughtTrack.find(".product-card").first();
-      return $card.length ? $card.outerWidth(true) : 0;
+      const gap = parseFloat($mostBoughtTrack.css("gap")) || 0;
+      return $card.length ? $card.outerWidth() + gap : 0;
     };
     const getMostBoughtMax = () => {
       const total = $mostBoughtTrack.children().length;

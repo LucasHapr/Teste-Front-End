@@ -128,6 +128,28 @@ const UI = (() => {
             <a href="/category.html?cat=oculos" class="drawer-category-link">Óculos</a>
           </div>
         </div>
+        
+        <div class="drawer-mobile-only">
+          <div class="drawer-social-icons">
+            <a href="#" class="drawer-social-icon">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="#" class="drawer-social-icon">
+              <i class="fa-solid fa-phone"></i>
+            </a>
+            <a href="#" class="drawer-social-icon">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#" class="drawer-social-icon">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+          </div>
+          
+          <div class="drawer-auth-buttons">
+            <a href="/login.html" class="drawer-auth-btn">Entrar</a>
+            <a href="/register.html" class="drawer-auth-btn">Cadastrar</a>
+          </div>
+        </div>
       </div>
     </div>
   `;
@@ -162,47 +184,62 @@ const UI = (() => {
   const benefitsTemplate = () => `
     <section id="benefits" class="py-12 md:py-16 bg-white">
       <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-11">
-          <div class="flex items-center gap-4">
-            <div class="flex items-center justify-center w-16 h-16 rounded-xl flex-shrink-0" style="background-color: #F6EFFF;">
-              <i class="fa-solid fa-truck text-purple-700 text-2xl"></i>
+        <div class="benefits-carousel-wrapper">
+          <button class="benefits-arrow benefits-arrow-left js-benefits-prev">
+            <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
+              <path d="M8 2L2 8L8 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div>
+            <div class="benefits-section benefits-carousel-track">
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fa-solid fa-truck"></i>
+              </div>
+              <div class="benefit-content">
+                <h3 class="benefit-title">Entrega rápida</h3>
+                <p class="benefit-subtitle">Para todo o país</p>
+              </div>
             </div>
-            <div class="flex flex-col">
-              <h3 class="text-base font-semibold text-purple-900">Entrega rápida</h3>
-              <p class="text-xs text-gray-500">Para todo o país</p>
-            </div>
-          </div>
 
-          <div class="flex items-center gap-4">
-            <div class="flex items-center justify-center w-16 h-16 rounded-xl flex-shrink-0" style="background-color: #F6EFFF;">
-              <i class="fa-solid fa-credit-card text-purple-700 text-2xl"></i>
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fa-solid fa-credit-card"></i>
+              </div>
+              <div class="benefit-content">
+                <h3 class="benefit-title">Parcele suas compras</h3>
+                <p class="benefit-subtitle">Em todos os cartões de crédito</p>
+              </div>
             </div>
-            <div class="flex flex-col">
-              <h3 class="text-base font-semibold text-purple-900">Parcele suas compras</h3>
-              <p class="text-xs text-gray-500">Em todos os cartões de crédito</p>
-            </div>
-          </div>
 
-          <div class="flex items-center gap-4">
-            <div class="flex items-center justify-center w-16 h-16 rounded-xl flex-shrink-0" style="background-color: #F6EFFF;">
-              <i class="fa-solid fa-lock text-purple-700 text-2xl"></i>
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fa-solid fa-lock"></i>
+              </div>
+              <div class="benefit-content">
+                <h3 class="benefit-title">Loja segura</h3>
+                <p class="benefit-subtitle">Compre com segurança</p>
+              </div>
             </div>
-            <div class="flex flex-col">
-              <h3 class="text-base font-semibold text-purple-900">Loja segura</h3>
-              <p class="text-xs text-gray-500">Compre com segurança</p>
-            </div>
-          </div>
 
-          <div class="flex items-center gap-4">
-            <div class="flex items-center justify-center w-16 h-16 rounded-xl flex-shrink-0" style="background-color: #F6EFFF;">
-              <i class="fa-solid fa-box text-purple-700 text-2xl"></i>
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fa-solid fa-box"></i>
+              </div>
+              <div class="benefit-content">
+                <h3 class="benefit-title">Todos os produtos</h3>
+                <p class="benefit-subtitle">Estão à pronta entrega</p>
+              </div>
             </div>
-            <div class="flex flex-col">
-              <h3 class="text-base font-semibold text-purple-900">Todos os produtos</h3>
-              <p class="text-xs text-gray-500">Estão à pronta entrega</p>
             </div>
           </div>
+          <button class="benefits-arrow benefits-arrow-right js-benefits-next">
+            <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
+              <path d="M2 2L8 8L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
+        <div class="benefits-dots"></div>
       </div>
     </section>
   `;
@@ -233,13 +270,37 @@ const UI = (() => {
       <div class="lilac-container">
         <div class="footer-shell grid grid-cols-1 md:grid-cols-5 gap-8">
           <div>
-            <h4 class="font-semibold mb-3">Redes sociais</h4>
-            <ul class="space-y-2">
-              <li><a class="footer-link" href="#">Instagram</a></li>
-              <li><a class="footer-link" href="#">Facebook</a></li>
-              <li><a class="footer-link" href="#">TikTok</a></li>
-              <li><a class="footer-link" href="#">YouTube</a></li>
-            </ul>
+            <div class="footer-social-box">
+              <h4 class="font-semibold mb-3 footer-social-title">Redes sociais</h4>
+              <a class="footer-social-item" href="#" aria-label="Instagram">
+                <span class="footer-social-left">
+                  <i class="fa-brands fa-instagram"></i>
+                  <span>Instagram</span>
+                </span>
+                <i class="fa-solid fa-chevron-right footer-social-arrow"></i>
+              </a>
+              <a class="footer-social-item" href="#" aria-label="Facebook">
+                <span class="footer-social-left">
+                  <i class="fa-brands fa-facebook-f"></i>
+                  <span>Facebook</span>
+                </span>
+                <i class="fa-solid fa-chevron-right footer-social-arrow"></i>
+              </a>
+              <a class="footer-social-item" href="#" aria-label="TikTok">
+                <span class="footer-social-left">
+                  <i class="fa-brands fa-tiktok"></i>
+                  <span>Tiktok</span>
+                </span>
+                <i class="fa-solid fa-chevron-right footer-social-arrow"></i>
+              </a>
+              <a class="footer-social-item" href="#" aria-label="YouTube">
+                <span class="footer-social-left">
+                  <i class="fa-brands fa-youtube"></i>
+                  <span>YouTube</span>
+                </span>
+                <i class="fa-solid fa-chevron-right footer-social-arrow"></i>
+              </a>
+            </div>
           </div>
           <div>
             <h4 class="font-semibold mb-3">Institucional</h4>
