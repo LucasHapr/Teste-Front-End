@@ -525,9 +525,11 @@ const UI = (() => {
     const cart = getCart();
     if (!cart.length) {
       $("#cart-items").html(
-        `<div class="lilac-card p-6 text-center">Seu carrinho está vazio.</div>`
+        `<div class="cart-page-empty">Seu carrinho está vazio.</div>`
       );
       $("#cart-subtotal").text("R$ 0,00");
+      $("#cart-total-main").text("R$ 0,00");
+      $("#cart-installments-summary").text("12x de R$ 0,00 sem juros");
       return;
     }
 
@@ -536,30 +538,44 @@ const UI = (() => {
         const product = STORE_PRODUCTS.find((prod) => prod.id === item.productId);
         if (!product) return "";
         return `
-          <div class="lilac-card p-4 flex flex-col md:flex-row gap-4 items-center" data-product-id="${product.id}" data-size="${item.size || ""}">
-            <div class="img-wrap w-24 h-24">
+          <article class="cart-page-item" data-product-id="${product.id}" data-size="${item.size || ""}">
+            <div class="cart-page-item-thumb">
               <img data-fallback src="${product.img}" alt="${product.name}" />
-              <span class="img-fallback-text">Imagem</span>
             </div>
-            <div class="flex-1">
-              <p class="font-semibold">${product.name}</p>
-              <p class="text-sm text-lilac-muted">Tamanho: ${item.size || "-"}</p>
-              <p class="text-sm">Preço unitário: R$ ${formatCurrency(product.price)}</p>
-              <button class="text-xs text-lilac-primary mt-1 js-remove-item">Remover</button>
+
+            <div class="cart-page-item-info">
+              <h3 class="cart-page-item-name">${product.name}</h3>
+              <p class="cart-page-item-size"><strong>Tamanho:</strong> ${item.size || "-"}</p>
             </div>
-            <div class="flex items-center gap-3">
-              <button class="qty-btn js-qty-minus">-</button>
-              <span class="font-semibold js-qty-value">${item.qty}</span>
-              <button class="qty-btn js-qty-plus">+</button>
+
+            <div class="cart-page-item-unit">
+              <span>Preço Unitário:</span>
+              <strong>R$ ${formatCurrency(product.price)}</strong>
             </div>
-            <div class="text-right font-semibold">R$ ${formatCurrency(product.price * item.qty)}</div>
-          </div>
+
+            <div class="cart-page-item-qty-wrap">
+              <div class="cart-page-item-qty">
+                <button class="js-qty-minus" type="button">-</button>
+                <span class="js-qty-value">${item.qty}</span>
+                <button class="js-qty-plus" type="button">+</button>
+              </div>
+              <button class="cart-page-item-remove js-remove-item" type="button">Remover</button>
+            </div>
+
+            <div class="cart-page-item-total">
+              <span>Total</span>
+              <strong>R$ ${formatCurrency(product.price * item.qty)}</strong>
+            </div>
+          </article>
         `;
       })
       .join("");
 
     $("#cart-items").html(itemsHtml);
-    $("#cart-subtotal").text(`R$ ${formatCurrency(getCartSubtotal())}`);
+    const subtotal = getCartSubtotal();
+    $("#cart-subtotal").text(`R$ ${formatCurrency(subtotal)}`);
+    $("#cart-total-main").text(`R$ ${formatCurrency(subtotal)}`);
+    $("#cart-installments-summary").text(`12x de R$ ${formatCurrency(subtotal / 12)} sem juros`);
     attachImageFallback();
   };
 

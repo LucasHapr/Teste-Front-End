@@ -13,34 +13,52 @@
     <div id="mobile-drawer"></div>
 
     <main class="lilac-container space-y-8" id="page-content">
-      <h1 class="text-xl font-semibold text-lilac-primary">CARRINHO DE COMPRAS</h1>
-      <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="space-y-4 lg:col-span-2" id="cart-items"></div>
-        <div class="lilac-card p-6 h-fit">
-          <h2 class="text-lg font-semibold mb-4">RESUMO DO PEDIDO</h2>
-          <div class="flex justify-between text-sm mb-2">
-            <span>Subtotal</span>
-            <span id="cart-subtotal">R$ 0,00</span>
-          </div>
-          <p class="text-xs text-lilac-muted mb-4">12x de R$ 26,57 sem juros</p>
-          <button class="lilac-btn w-full mb-4">Finalizar compra</button>
-          <p class="text-xs text-lilac-muted mb-2">Possui um cupom de desconto?</p>
-          <p class="text-xs text-lilac-muted mb-4">Você poderá utilizar no passo do pagamento</p>
-          <p class="text-xs text-lilac-muted mb-2">Informe o CEP para calcular o prazo de entrega</p>
-          <div class="flex gap-2">
-            <input class="flex-1 rounded-full border border-lilac-border px-4 py-2" placeholder="Digite seu CEP" />
-            <button class="lilac-btn lilac-btn-outline">Buscar</button>
-          </div>
-          <p class="text-xs text-lilac-muted mt-2">Não sei meu CEP</p>
+      <section class="register-top-shell">
+        <div class="register-top-tabs">
+          <a href="/category.html?cat=camisetas" class="register-top-tab">CAMISETAS</a>
+          <a href="/category.html?cat=calcados" class="register-top-tab">CALÇADOS</a>
+          <a href="/category.html?cat=bolsas" class="register-top-tab">BOLSAS</a>
+          <a href="/category.html?cat=oculos" class="register-top-tab">ÓCULOS</a>
         </div>
       </section>
 
-      <div class="flex gap-4">
-        <button class="lilac-btn lilac-btn-outline js-clear-cart">Remover todos os itens</button>
-        <a href="/category.html?cat=camisetas" class="lilac-btn lilac-btn-outline">Adicionar mais itens</a>
-      </div>
+      <section class="cart-page-layout">
+        <div class="cart-page-main">
+          <h1 class="cart-page-title">CARRINHO DE COMPRAS</h1>
+          <div class="cart-page-items" id="cart-items"></div>
 
-      <section id="newsletter"></section>
+          <div class="cart-page-actions">
+            <button class="cart-page-btn cart-page-btn-outline js-clear-cart">Remover todos os itens</button>
+            <a href="/category.html?cat=camisetas" class="cart-page-btn cart-page-btn-solid">Adicionar mais itens</a>
+          </div>
+        </div>
+
+        <aside class="cart-summary-card">
+          <h2 class="cart-summary-title">RESUMO DO PEDIDO</h2>
+          <div class="cart-summary-row">
+            <span>Sub-total</span>
+            <span id="cart-subtotal">R$ 0,00</span>
+          </div>
+
+          <p class="cart-summary-total" id="cart-total-main">R$ 0,00</p>
+          <p class="cart-summary-installments" id="cart-installments-summary">12x de R$ 0,00 sem juros</p>
+
+          <button class="cart-summary-checkout-btn" type="button">Finalizar compra</button>
+
+          <p class="cart-summary-coupon-title">Possui um cupom de desconto?</p>
+          <p class="cart-summary-coupon-text">Você poderá utilizá-lo na etapa de pagamento</p>
+
+          <div class="cart-summary-divider"></div>
+
+          <p class="cart-summary-cep-title">Informe o CEP para consultar o prazo de entrega:</p>
+          <div class="cart-summary-cep-row">
+            <input type="text" placeholder="Digite seu CEP" />
+            <button type="button">Buscar</button>
+          </div>
+          <a href="#" class="cart-summary-cep-help">Não sei meu CEP</a>
+        </aside>
+      </section>
+
     </main>
 
     <div id="site-footer"></div>
