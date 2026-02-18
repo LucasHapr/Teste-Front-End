@@ -186,8 +186,8 @@ const UI = (() => {
   `;
 
   const benefitsTemplate = () => `
-    <section id="benefits" class="py-12 md:py-16 bg-white">
-      <div class="container mx-auto px-4">
+    <section id="benefits" class="py-4 md:py-6 bg-white">
+      <div class="lilac-container">
         <div class="benefits-carousel-wrapper">
           <button class="benefits-arrow benefits-arrow-left js-benefits-prev">
             <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
@@ -198,7 +198,7 @@ const UI = (() => {
             <div class="benefits-section benefits-carousel-track">
             <div class="benefit-item">
               <div class="benefit-icon">
-                <i class="fa-solid fa-truck"></i>
+                <i class="fa-solid fa-truck-fast"></i>
               </div>
               <div class="benefit-content">
                 <h3 class="benefit-title">Entrega rápida</h3>
@@ -208,7 +208,7 @@ const UI = (() => {
 
             <div class="benefit-item">
               <div class="benefit-icon">
-                <i class="fa-solid fa-credit-card"></i>
+                <i class="fa-solid fa-wallet"></i>
               </div>
               <div class="benefit-content">
                 <h3 class="benefit-title">Parcele suas compras</h3>
@@ -218,7 +218,7 @@ const UI = (() => {
 
             <div class="benefit-item">
               <div class="benefit-icon">
-                <i class="fa-solid fa-lock"></i>
+                <i class="fa-solid fa-bag-shopping"></i>
               </div>
               <div class="benefit-content">
                 <h3 class="benefit-title">Loja segura</h3>
@@ -228,7 +228,7 @@ const UI = (() => {
 
             <div class="benefit-item">
               <div class="benefit-icon">
-                <i class="fa-solid fa-box"></i>
+                <i class="fa-solid fa-box-open"></i>
               </div>
               <div class="benefit-content">
                 <h3 class="benefit-title">Todos os produtos</h3>

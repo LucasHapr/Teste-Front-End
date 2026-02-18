@@ -495,60 +495,59 @@ body {
 .benefits-section {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  padding: 2rem 0;
+  gap: 2rem;
+  padding: 0.35rem 0;
 }
 
 .benefit-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background-color: var(--lilac-soft);
-  padding: 1.25rem 1rem;
-  border-radius: var(--lilac-radius);
-  transition: all 0.3s ease;
+  gap: 0.95rem;
+  background: transparent;
+  padding: 0.25rem 0;
+  border-radius: 0;
+  transition: none;
 }
 
 .benefit-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--lilac-shadow);
+  transform: none;
+  box-shadow: none;
 }
 
 .benefit-icon {
-  width: 50px;
-  height: 50px;
-  min-width: 50px;
-  background-color: var(--lilac-soft);
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  background-color: #ede6f6;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--lilac-primary);
+  color: #b996df;
 }
 
-.benefit-icon svg {
-  width: 28px;
-  height: 28px;
+.benefit-icon i {
+  font-size: 1.22rem;
 }
 
 .benefit-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.18rem;
 }
 
 .benefit-title {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #333;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #6f5a8a;
   line-height: 1.2;
   margin: 0;
 }
 
 .benefit-subtitle {
-  font-size: 0.75rem;
-  color: #666;
+  font-size: 0.89rem;
+  color: #7f7098;
   line-height: 1.3;
   margin: 0;
 }
@@ -566,7 +565,7 @@ body {
     position: relative;
     overflow: visible;
     display: block;
-    padding: 2rem 0;
+    padding: 1.35rem 0;
   }
 
   .benefits-carousel-track {
@@ -583,22 +582,23 @@ body {
     max-width: 280px;
     flex-shrink: 0;
     margin: 0 auto;
+    padding: 0.4rem 0.2rem;
   }
 
   .benefits-carousel-track .benefit-icon {
     width: 40px;
     height: 40px;
     min-width: 40px;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .benefits-carousel-track .benefit-title {
-    font-size: 0.9375rem;
+    font-size: 0.9rem;
     white-space: nowrap;
   }
 
   .benefits-carousel-track .benefit-subtitle {
-    font-size: 0.8125rem;
+    font-size: 0.8rem;
     white-space: nowrap;
   }
 
