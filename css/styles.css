@@ -4000,6 +4000,14 @@ body.modal-open {
 }
 
 @media (max-width: 768px) {
+  .cart-page-main {
+    order: 1;
+  }
+
+  .cart-summary-card {
+    order: 2;
+  }
+
   .cart-page-item {
     grid-template-columns: 92px 1fr;
     gap: 0.75rem;
@@ -4023,6 +4031,14 @@ body.modal-open {
   .cart-page-actions {
     justify-content: stretch;
     flex-direction: column;
+  }
+
+  .cart-page-btn-solid {
+    order: 1;
+  }
+
+  .cart-page-btn-outline {
+    order: 2;
   }
 
   .cart-page-btn {
