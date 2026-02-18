@@ -493,6 +493,7 @@ const UI = (() => {
 
     $("#product-thumbs").html(thumbs);
     $("#product-main-img").attr("src", product.images[0] || product.img);
+    $("#product-main-media").data("images", product.images || [product.img]).data("index", 0);
     $("#product-title").text(product.name);
     $("#product-price").text(`R$ ${formatCurrency(product.price)}`);
     $("#product-old-price").text(`R$ ${formatCurrency(product.oldPrice)}`);
@@ -581,6 +582,18 @@ const UI = (() => {
     const closeShippingModal = () => {
       $("#shipping-modal").removeClass("open").attr("aria-hidden", "true");
       $("body").removeClass("modal-open");
+    };
+
+    const goToMainMediaIndex = (nextIndex) => {
+      const $media = $("#product-main-media");
+      const images = $media.data("images");
+      if (!Array.isArray(images) || !images.length) return;
+
+      const normalizedIndex = (nextIndex + images.length) % images.length;
+      $media.data("index", normalizedIndex);
+      $("#product-main-img").attr("src", images[normalizedIndex]);
+      $(".js-thumb").removeClass("is-active");
+      $(`.js-thumb[data-thumb="${normalizedIndex}"]`).addClass("is-active");
     };
 
     $(document).on("click", ".js-open-drawer", (e) => {
@@ -727,11 +740,48 @@ const UI = (() => {
       $("#product-main-img").attr("src", img);
       $(".js-thumb").removeClass("is-active");
       $(this).addClass("is-active");
+      $("#product-main-media").data("index", Number($(this).data("thumb")) || 0);
 
       const viewport = document.getElementById("product-thumbs-viewport");
       if (viewport && window.innerWidth > 1024) {
         this.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
       }
+    });
+
+    $(document).on("click", ".product-main-arrow-left", function () {
+      if (window.innerWidth > 768) return;
+      const currentIndex = Number($("#product-main-media").data("index")) || 0;
+      goToMainMediaIndex(currentIndex - 1);
+    });
+
+    $(document).on("click", ".product-main-arrow-right", function () {
+      if (window.innerWidth > 768) return;
+      const currentIndex = Number($("#product-main-media").data("index")) || 0;
+      goToMainMediaIndex(currentIndex + 1);
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    $(document).on("touchstart", "#product-main-media", function (e) {
+      if (window.innerWidth > 768) return;
+      touchStartX = e.originalEvent.touches[0].clientX;
+    });
+
+    $(document).on("touchmove", "#product-main-media", function (e) {
+      if (window.innerWidth > 768) return;
+      touchEndX = e.originalEvent.touches[0].clientX;
+    });
+
+    $(document).on("touchend", "#product-main-media", function () {
+      if (window.innerWidth > 768) return;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) < 40) return;
+
+      const currentIndex = Number($("#product-main-media").data("index")) || 0;
+      goToMainMediaIndex(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+      touchStartX = 0;
+      touchEndX = 0;
     });
 
     $(document).on("click", ".js-qty-minus", function () {

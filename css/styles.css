@@ -2253,8 +2253,40 @@ body {
 
 @media (max-width: 768px) {
   .buy-together-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     gap: 1rem;
+    padding-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .buy-together-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .buy-together-card {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+
+  #related-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #related-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  #related-grid .product-card {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
   }
 
   .buy-together-card-media img {
@@ -3235,6 +3267,23 @@ body.modal-open {
 
   .product-main-media {
     min-height: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-gallery-rail {
+    display: none;
+  }
+
+  .product-main-media {
+    min-height: 320px;
+  }
+
+  .product-main-media .product-main-arrow {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.75);
   }
 }
 
