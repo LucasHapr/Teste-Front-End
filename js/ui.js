@@ -62,7 +62,11 @@ const UI = (() => {
             </div>
           </div>
           
-          <a href="/index.html" class="header-logo anton-regular">LILAC</a>
+          <a href="/index.html" class="header-logo" aria-label="LILAC">
+            <svg width="127" height="31" viewBox="0 0 127 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M8.37432 0V23.3058H20.7866L22.9095 30.4024H8.37432H0V23.3058V0H8.37432ZM48.2722 0V23.3031H62.8074V30.3933L71.5787 0H87.1447L96.2408 30.4024H87.3285L85.1417 21.9937H73.9333L71.7784 30.4024H62.8048L62.8056 30.3998H22.9095V23.3031H27.2752V7.09664H22.9095V0H48.2722ZM35.5909 7.09664V23.3031H39.8979V7.09664H35.5909ZM75.5527 15.67L79.4949 0.281528L83.4982 15.67H75.5527ZM116.007 21.2156C116.945 20.4214 117.512 19.2289 117.712 17.638V17.6433H126.385C125.985 19.9885 125.128 22.185 123.812 24.2327C122.496 26.2831 120.671 27.9218 118.338 29.1541C116.007 30.3865 113.107 31.0027 109.636 31.0027C106.445 31.0027 103.534 30.3652 100.902 29.093C98.2706 27.8209 96.177 25.9112 94.6214 23.3669C93.0686 20.8225 92.3094 17.6593 92.3494 13.8825C92.3894 10.1855 93.1751 7.01431 94.712 4.369C95.7108 2.64531 96.9494 1.19251 98.4171 0H121.276C122.254 0.833962 123.093 1.7715 123.782 2.81794C125.077 4.78598 125.905 6.90541 126.265 9.17092H117.651C117.451 7.6597 116.884 6.54421 115.946 5.82976C115.009 5.11266 113.972 4.64522 112.835 4.42743C111.698 4.20965 110.691 4.10075 109.815 4.10075C106.703 4.10075 104.391 4.9055 102.876 6.51499C101.36 8.12449 100.604 10.3608 100.604 13.2239C100.604 16.3658 101.342 18.8093 102.817 20.5595C104.293 22.3098 106.605 23.1836 109.756 23.1836C110.672 23.1836 111.711 23.0561 112.867 22.7958C114.023 22.5382 115.07 22.0123 116.007 21.2156Z" fill="#D2AFFF"/>
+            </svg>
+          </a>
           
           <div class="flex items-center gap-3">
             <div class="user-menu-wrapper">
@@ -546,6 +550,7 @@ const UI = (() => {
       const size = $(this).data("size") || $(".js-size-btn.active").data("size") || null;
       addToCart(productId, 1, size);
       updateCartBadge();
+      updateCartDrawer();
       if ($("body").data("page") === "cart") {
         renderCartPage();
       }
@@ -610,8 +615,8 @@ const UI = (() => {
     }
 
     let html = "";
-    cart.forEach(item => {
-      const product = store.products.find(p => p.id === item.productId);
+    cart.forEach((item) => {
+      const product = STORE_PRODUCTS.find((p) => Number(p.id) === Number(item.productId));
       if (!product) return;
       
       html += `
@@ -633,6 +638,12 @@ const UI = (() => {
         </div>
       `;
     });
+
+    if (!html) {
+      $items.html('<div class="cart-drawer-empty">Sua sacola está vazia</div>');
+      $("#cart-drawer-subtotal").text("R$ 0,00");
+      return;
+    }
 
     $items.html(html);
     $("#cart-drawer-subtotal").text(`R$ ${formatCurrency(getCartSubtotal())}`);

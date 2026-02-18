@@ -54,7 +54,7 @@ const clearCart = () => saveCart([]);
 const getCartSubtotal = () => {
   const cart = getCart();
   return cart.reduce((total, item) => {
-    const product = STORE_PRODUCTS.find((prod) => prod.id === item.productId);
+    const product = STORE_PRODUCTS.find((prod) => Number(prod.id) === Number(item.productId));
     if (!product) return total;
     return total + product.price * item.qty;
   }, 0);

@@ -198,13 +198,16 @@ body {
 }
 
 .header-logo {
-  font-size: 3rem;
-  font-weight: 400;
-  letter-spacing: -0.1rem;
-  background: #D2AFFF;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.header-logo svg {
+  width: 127px;
+  height: 31px;
+  display: block;
 }
 
 .search-wrapper {
