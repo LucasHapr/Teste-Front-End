@@ -291,6 +291,27 @@ $(document).ready(() => {
   if (page === "category") {
     const category = getQueryParam("cat");
     UI.renderCategoryPage(category);
+
+    $(".js-toggle-category-filters").on("click", function () {
+      const $dropdown = $("#category-filters-dropdown");
+      const isOpen = $dropdown.hasClass("open");
+      $dropdown.toggleClass("open", !isOpen);
+      $(this).toggleClass("active", !isOpen);
+      $(this).attr("aria-expanded", String(!isOpen));
+    });
+
+    $(".category-clear-all").on("click", () => {
+      $("#category-filters-dropdown .category-pill").removeClass("category-pill-active");
+      $("#category-filters-dropdown .category-filter-chip").remove();
+    });
+
+    $(".js-close-category-filters").on("click", () => {
+      const $dropdown = $("#category-filters-dropdown");
+      const $toggle = $(".js-toggle-category-filters");
+      $dropdown.removeClass("open");
+      $toggle.removeClass("active");
+      $toggle.attr("aria-expanded", "false");
+    });
   }
 
   if (page === "product") {

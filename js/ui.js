@@ -346,6 +346,46 @@ const UI = (() => {
     </footer>
   `;
 
+  const siteInfoTemplate = () => `
+    <div class="site-info-section">
+      <div class="site-info-container">
+        <div class="site-info-category">
+          <h3 class="site-info-category-title">Pagamento</h3>
+          <div class="site-info-icons">
+            <img src="/assets/img/info-icons/boleto.svg" alt="Boleto" class="site-info-icon">
+            <img src="/assets/img/info-icons/visa.svg" alt="Visa" class="site-info-icon">
+            <img src="/assets/img/info-icons/mastercard.svg" alt="Mastercard" class="site-info-icon">
+            <img src="/assets/img/info-icons/american-express.svg" alt="American Express" class="site-info-icon">
+            <img src="/assets/img/info-icons/diners.svg" alt="Diners" class="site-info-icon">
+            <img src="/assets/img/info-icons/hipercard.svg" alt="Hipercard" class="site-info-icon">
+            <img src="/assets/img/info-icons/elo.svg" alt="Elo" class="site-info-icon">
+          </div>
+        </div>
+
+        <div class="site-info-category">
+          <h3 class="site-info-category-title">Segurança</h3>
+          <div class="site-info-icons">
+            <img src="/assets/img/info-icons/google-security.svg" alt="Google Security" class="site-info-icon">
+          </div>
+        </div>
+
+        <div class="site-info-category">
+          <h3 class="site-info-category-title">Entrega</h3>
+          <div class="site-info-icons">
+            <img src="/assets/img/info-icons/correios.svg" alt="Correios" class="site-info-icon">
+          </div>
+        </div>
+
+        <div class="site-info-category">
+          <h3 class="site-info-category-title">Plataforma</h3>
+          <div class="site-info-icons">
+            <img src="/assets/img/info-icons/irroba.svg" alt="Irroba" class="site-info-icon">
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
   const productCard = (product, extraClass = "") => `
     <div class="product-card ${extraClass}">
       <div class="product-card-image">
@@ -383,7 +423,13 @@ const UI = (() => {
   };
 
   const renderCategoryPage = (category) => {
-    const products = category ? STORE_PRODUCTS.filter((prod) => prod.category === category) : STORE_PRODUCTS;
+    const baseProducts = category ? STORE_PRODUCTS.filter((prod) => prod.category === category) : STORE_PRODUCTS;
+    let products = baseProducts;
+
+    if (category && baseProducts.length > 0 && baseProducts.length < 12) {
+      products = Array.from({ length: 12 }, (_, index) => baseProducts[index % baseProducts.length]);
+    }
+
     $("#category-title").text(category ? category.toUpperCase() : "PRODUTOS");
     $("#category-breadcrumb").text(category ? `Home / ${category}` : "Home / Produtos");
     const cards = products.map((prod) => productCard(prod)).join("");
@@ -660,6 +706,10 @@ const UI = (() => {
     $("#benefits").html(benefitsTemplate());
     $("#newsletter").html(newsletterTemplate());
     $("#site-footer").html(footerTemplate());
+
+    if (!$(".site-info-section").length) {
+      $("#site-footer").after(siteInfoTemplate());
+    }
   };
 
   return {
